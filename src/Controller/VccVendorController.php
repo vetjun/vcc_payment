@@ -32,6 +32,19 @@ class VccVendorController extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+
+    /**
+     * @Route("/vcc/vendor/{id}", name="vcc_vendor_show", methods={"GET"})
+     */
+    public function show(VccVendor $vccVendor): Response
+    {
+        $response = new Response();
+        $serializer = $this->get('serializer');
+        $response->setContent($serializer->serialize($vccVendor, 'json'));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
     /**
      * @Route("/vcc/vendor", name="vcc_vendor_create", methods={"POST"})
      */
@@ -65,7 +78,7 @@ class VccVendorController extends AbstractController
         return $response;
     }
     /**
-     * @Route("vcc/vendor/{id}", name="vcc_vendor_delete", methods={"DELETE"})
+     * @Route("/vcc/vendor/{id}", name="vcc_vendor_delete", methods={"DELETE"})
      */
     public function delete(Request $request, VccVendor $vcc_vendor, BucketRepository $bucketRepository): Response
     {
