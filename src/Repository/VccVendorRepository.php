@@ -26,8 +26,8 @@ class VccVendorRepository extends ServiceEntityRepository
     {
         $builder = $this->createQueryBuilder('vcc_vendor');
         foreach ($filters as $filterKey => $filter){
-            $builder = $builder->andWhere('vcc_vendor.' . $filterKey . ' = :val')
-                ->setParameter('val', $filter);
+            $builder = $builder->andWhere('vcc_vendor.' . $filterKey . ' = :' . $filterKey)
+                ->setParameter($filterKey, $filter);
         }
         return $builder
             ->orderBy('vcc_vendor.id', 'ASC')
