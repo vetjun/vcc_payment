@@ -75,7 +75,14 @@ class Vendor2 implements VendorInterface
             $this->em->persist($this->bucket);
             $this->em->persist($vcc_vendor);
             $this->em->flush();
-            return ["success" => true, "vcc_vendor" => $vcc_vendor->getId()];
+            $vcc_vendor_obj = [
+                "processId" => $vcc_vendor->getProcessId(),
+                "reference" => $vcc_vendor->getReference(),
+                "cardNumber" => $vcc_vendor->getCardNumber(),
+                "cvc" => $vcc_vendor->getCvc(),
+                "expireDate" => $vcc_vendor->getExpireDate()->format("Y-m-d")
+            ];
+            return ["success" => true, "vcc_vendor" => $vcc_vendor_obj];
         }else{
             return ["success" => false, "vcc_vendor" => null];
         }
