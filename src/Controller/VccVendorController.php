@@ -67,13 +67,19 @@ class VccVendorController extends AbstractController
     /**
      * @Route("vcc/vendor/{id}", name="vcc_vendor_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, VccVendor $vcc_vendor): Response
+    public function delete(Request $request, VccVendor $vcc_vendor, BucketRepository $bucketRepository): Response
     {
         $response = new Response();
         try{
+            $bucket = $bucketRepository->find($vcc_vendor->getBucketId());
+            $refund_balance = (new CurrencyController())->convert($vcc_vendor->getCurrency(), $vcc_vendor->getBalance());
+            $limit_Val = $bucket->getLimitVal();
+            $bucket->setLimitVal($limit_Val + $refund_balance);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($vcc_vendor);
+            $entityManager->persist($bucket);
             $entityManager->flush();
+
             $response->setContent(json_encode([
                 'success' => true
             ]));
