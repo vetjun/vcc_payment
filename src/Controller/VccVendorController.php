@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 
+use App\Entity\Bucket;
+use App\Entity\VccVendor;
 use App\Repository\BucketRepository;
 use App\Repository\VccVendorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,5 +63,30 @@ class VccVendorController extends AbstractController
         $response->setContent(json_encode($result));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
+    }
+    /**
+     * @Route("vcc/vendor/{id}", name="vcc_vendor_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, VccVendor $vcc_vendor): Response
+    {
+        $response = new Response();
+        try{
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($vcc_vendor);
+            $entityManager->flush();
+            $response->setContent(json_encode([
+                'success' => true
+            ]));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }catch (\Exception $e){
+
+            $response->setContent(json_encode([
+                'success' => false,
+                'message' => "invalid parameters"
+            ]));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
     }
 }

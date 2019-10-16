@@ -64,6 +64,7 @@ class Vendor3 implements VendorInterface
         $vcc_vendor->setReference($api_result->refCode);
         $vcc_vendor->setCvc($api_result->securityCode);
         $vcc_vendor->setVendor($this->bucket->getVendor());
+        $vcc_vendor->setBucketId($this->bucket->getId());
         $vcc_vendor->setNotes($this->request_json['notes']);
 
         $converted_balance = $this->currency->convert($this->request_json['currency'], $this->request_json['balance']);

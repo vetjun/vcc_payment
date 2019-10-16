@@ -66,6 +66,11 @@ class VccVendor
      */
     private $cvc;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $bucket_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +192,18 @@ class VccVendor
     public function setVendor(string $vendor): self
     {
         $this->vendor = $vendor;
+
+        return $this;
+    }
+
+    public function getBucketId(): ?int
+    {
+        return $this->bucket_id;
+    }
+
+    public function setBucketId(int $bucket_id): self
+    {
+        $this->bucket_id = $bucket_id;
 
         return $this;
     }
