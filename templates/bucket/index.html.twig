@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bucket index{% endblock %}
+
+{% block body %}
+    <h1>Bucket index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Start_date</th>
+                <th>End_date</th>
+                <th>Limit_val</th>
+                <th>Vendor</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bucket in buckets %}
+            <tr>
+                <td>{{ bucket.id }}</td>
+                <td>{{ bucket.startDate ? bucket.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ bucket.endDate ? bucket.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ bucket.limitVal }}</td>
+                <td>{{ bucket.vendor }}</td>
+                <td>
+                    <a href="{{ path('bucket_show', {'id': bucket.id}) }}">show</a>
+                    <a href="{{ path('bucket_edit', {'id': bucket.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bucket_new') }}">Create new</a>
+{% endblock %}

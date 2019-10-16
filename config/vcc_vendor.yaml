@@ -1,0 +1,12 @@
+parameters:
+    Vendor1:
+      url: "http://www.mocky.io/v2/5da5dbd33400001628632d49"
+
+    Vendor2:
+      url: "http://www.mocky.io/v2/5da5dc72340000d325632d4d"
+
+    Vendor3:
+      url: "http://www.mocky.io/v2/5da5dcd2340000221a632d50"
+
+    currency:
+      url: "http://www.mocky.io/v2/5da5e0e3340000dd1a632d70"

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Bucket{% endblock %}
+
+{% block body %}
+    <h1>Create new Bucket</h1>
+
+    {{ include('bucket/_form.html.twig') }}
+
+    <a href="{{ path('bucket_index') }}">back to list</a>
+{% endblock %}

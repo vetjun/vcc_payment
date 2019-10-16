@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Bucket{% endblock %}
+
+{% block body %}
+    <h1>Edit Bucket</h1>
+
+    {{ include('bucket/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bucket_index') }}">back to list</a>
+
+    {{ include('bucket/_delete_form.html.twig') }}
+{% endblock %}
